@@ -112,3 +112,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Folders
+slides/
+cascades_OpenCV/
+scripts/.idea
