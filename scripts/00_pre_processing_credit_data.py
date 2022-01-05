@@ -11,6 +11,9 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import plotly.express as px
 from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+import pickle
+
 
 filepath = Path('../bases/credit_data.csv')
 
@@ -78,21 +81,28 @@ if __name__ == '__main__':
     Y_credit = base_credit.iloc[:, 4].values
 
     # Escalonamento dos Valores
-    print("Income")
-    print(X_credit[:, 0].min(), X_credit[:, 0].max())
-    print("Age")
-    print(X_credit[:, 1].min(), X_credit[:, 1].max())
-    print("Loan")
-    print(X_credit[:, 2].min(), X_credit[:, 2].max())
+    #print("Income")
+    #print(X_credit[:, 0].min(), X_credit[:, 0].max())
+    #print("Age")
+    #print(X_credit[:, 1].min(), X_credit[:, 1].max())
+    #print("Loan")
+    #print(X_credit[:, 2].min(), X_credit[:, 2].max())
 
     # Padronização é mais indicada quando há outliers na base de dados
 
     scaler_credit = StandardScaler()
     X_credit = scaler_credit.fit_transform(X_credit)
 
-    print("Income")
-    print(X_credit[:, 0].min(), X_credit[:, 0].max())
-    print("Age")
-    print(X_credit[:, 1].min(), X_credit[:, 1].max())
-    print("Loan")
-    print(X_credit[:, 2].min(), X_credit[:, 2].max())
+    #print("Income")
+    #print(X_credit[:, 0].min(), X_credit[:, 0].max())
+    #print("Age")
+    #print(X_credit[:, 1].min(), X_credit[:, 1].max())
+    #print("Loan")
+    #print(X_credit[:, 2].min(), X_credit[:, 2].max())
+
+    # Divisão das Bases em treinamento e teste
+    X_credit_treinamento, X_credit_teste, Y_credit_treinamento, Y_credit_teste = \
+        train_test_split(X_credit, Y_credit, test_size=0.25, random_state=0)
+
+    with open('credit.pkl', mode='wb') as f:
+        pickle.dump([X_credit_treinamento, Y_credit_treinamento, X_credit_teste, Y_credit_teste], f)
