@@ -117,3 +117,5 @@ dmypy.json
 slides/
 cascades_OpenCV/
 scripts/.idea
+
+*.pkl
